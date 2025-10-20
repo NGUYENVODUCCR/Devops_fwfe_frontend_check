@@ -64,7 +64,8 @@ class AuthService {
   final json = jsonDecode(response.body);
   return json['message'] ?? 'Đăng nhập thất bại';
 }
-
+print('Login response status: ${response.statusCode}');
+  print('Login response body: ${response.body}');
     } catch (e) {
       return 'Lỗi đăng nhập: $e';
     }
