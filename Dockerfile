@@ -19,8 +19,13 @@
     # Fix Git dubious ownership để tránh lỗi khi build web
     RUN git config --global --add safe.directory /sdks/flutter
     
-    # Cho phép user 'appuser' truy cập SDK và pub-cache
-    RUN chown -R appuser:appuser /sdks/flutter /tmp/.pub-cache
+    # Fix Git dubious ownership để tránh lỗi khi build web
+    RUN git config --global --add safe.directory /sdks/flutter
+
+    # Tạo pub-cache nếu chưa tồn tại và cho phép user 'appuser' truy cập SDK và pub-cache
+    RUN mkdir -p /tmp/.pub-cache \
+        && chown -R appuser:appuser /sdks/flutter /tmp/.pub-cache
+
     
     # Sử dụng user appuser để build
     USER appuser
