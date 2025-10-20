@@ -40,7 +40,7 @@ jobs:
       - name: Build & Push Docker image
         run: |
           IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/fwfe-frontend:latest
-          docker build -t $IMAGE_NAME .
+          docker build --build-arg API_BASE_URL=${{ secrets.API_BASE_URL }} -t $IMAGE_NAME .
           docker push $IMAGE_NAME
 
       # 7️⃣ SSH vào VPS để pull image mới và deploy Nginx container
