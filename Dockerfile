@@ -1,5 +1,5 @@
 # Stage 1: Build the app
-FROM cirrusci/flutter:3.24.3 AS build
+FROM ghcr.io/cirruslabs/flutter:3.24.3 AS build
 
 WORKDIR /app
 COPY pubspec.* ./
