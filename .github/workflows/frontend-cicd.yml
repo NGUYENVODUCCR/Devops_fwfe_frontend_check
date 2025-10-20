@@ -28,12 +28,12 @@ jobs:
         run: flutter doctor
 
       # 4️⃣ Build Docker image
-      - name: Build & Push Docker image
+      - name: Build Docker image
         run: |
           IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/fwfe-frontend:latest
-          docker build --build-arg API_BASE_URL=${{ secrets.API_BASE_URL }} -t $IMAGE_NAME .
-          docker push $IMAGE_NAME
-
+          docker build \
+            --build-arg API_BASE_URL=${{ secrets.API_BASE_URL }} \
+            -t $IMAGE_NAME .
 
       # 5️⃣ Log in Docker Hub
       - name: Docker login
