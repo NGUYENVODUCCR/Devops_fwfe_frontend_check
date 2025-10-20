@@ -40,30 +40,31 @@ class AuthService {
       );
 
       if (response.statusCode == 200) {
-       final json = jsonDecode(response.body);
+  final json = jsonDecode(response.body);
 
-final token = json['token'] as String?;
-final role = json['role'] as String?;
-final username = json['username'] as String?;
-final id = json['id'];
+  final token = json['token'];
+  final role = json['role'];
+  final username = json['username'];
+  final id = json['id'];
 
-if (token == null || role == null || username == null || id == null) {
-  return 'Login failed: missing data from backend';
+  if (token == null || role == null || username == null || id == null) {
+    return 'Backend trả dữ liệu không đầy đủ!';
+  }
+
+  await storage.write(key: 'token', value: token);
+  await storage.write(key: 'role', value: role);
+  await storage.write(key: 'username', value: username);
+  await storage.write(key: 'id', value: id.toString());
+
+  onSuccess(role);
+  return null;
+} else if (response.statusCode == 401) {
+  return 'Sai tên đăng nhập hoặc mật khẩu';
+} else {
+  final json = jsonDecode(response.body);
+  return json['message'] ?? 'Đăng nhập thất bại';
 }
 
-// Lưu vào storage
-await storage.write(key: 'token', value: token);
-await storage.write(key: 'role', value: role);
-await storage.write(key: 'username', value: username);
-await storage.write(key: 'id', value: id.toString());
-
-onSuccess(role);
-return null;
-
-      } else {
-        final json = jsonDecode(response.body);
-        return json['message'] ?? 'Đăng nhập thất bại';
-      }
     } catch (e) {
       return 'Lỗi đăng nhập: $e';
     }
