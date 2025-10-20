@@ -16,6 +16,8 @@ RUN curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable
 # Thêm Flutter vào PATH
 ENV PATH="$PATH:/opt/flutter/bin"
 
+RUN git config --global --add safe.directory /opt/flutter
+
 # Kiểm tra Flutter hoạt động
 RUN flutter --version
 

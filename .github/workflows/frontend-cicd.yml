@@ -9,6 +9,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    env:
+      PUB_CACHE: /tmp/.pub-cache
+
     steps:
       # 1️⃣ Lấy code từ repo
       - name: Checkout code
