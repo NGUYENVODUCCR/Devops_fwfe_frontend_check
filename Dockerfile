@@ -5,6 +5,8 @@ FROM ghcr.io/cirruslabs/flutter:3.24.3 AS build
 
 # ARG chỉ tồn tại trong thời gian build
 ARG API_BASE_URL
+ENV API_BASE_URL=$API_BASE_URL
+
 
 WORKDIR /app
 
