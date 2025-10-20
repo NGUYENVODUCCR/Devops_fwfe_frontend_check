@@ -5,8 +5,7 @@ import '../models/login_request.dart';
 import '../models/register_request.dart';
 
 class AuthService {
-  static const String apiBaseUrl = String.fromEnvironment('API_BASE_URL');
-
+  static const String apiBaseUrl = 'http://152.42.196.211:8080';
   static const String baseUrl = '$apiBaseUrl/api/auth';
   
   final storage = const FlutterSecureStorage();
