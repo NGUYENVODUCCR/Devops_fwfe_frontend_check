@@ -3,9 +3,8 @@
 # ======================================
 FROM ghcr.io/cirruslabs/flutter:3.24.3 AS build
 
-# Tham số build để truyền API_BASE_URL
+# ARG chỉ tồn tại trong thời gian build
 ARG API_BASE_URL
-ENV API_BASE_URL=${API_BASE_URL}
 
 WORKDIR /app
 
@@ -19,6 +18,12 @@ RUN mkdir -p /tmp/.pub-cache \
 
 # Copy pubspec trước để tận dụng cache
 COPY pubspec.* ./
+
+# Xoá cache Flutter/Dart cũ (tuỳ chọn)
+RUN flutter clean
+RUN flutter pub cache repair
+
+# Cài dependencies
 RUN flutter pub get
 
 # Copy toàn bộ source code
@@ -32,8 +37,8 @@ USER appuser
 
 ENV PUB_CACHE=/tmp/.pub-cache
 
-# Build web release với biến môi trường
-RUN flutter build web --release --dart-define=API_BASE_URL=$API_BASE_URL
+# Build web release với API_BASE_URL
+RUN flutter build web --release --dart-define=API_BASE_URL=${API_BASE_URL}
 
 # ======================================
 # Stage 2: Build final image Nginx
