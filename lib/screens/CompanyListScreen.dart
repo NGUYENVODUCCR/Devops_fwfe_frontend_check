@@ -154,3 +154,5 @@ class _CompanyListScreenState extends State<CompanyListScreen> {
     );
   }
 }
+
+
