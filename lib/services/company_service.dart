@@ -4,8 +4,10 @@ import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 class CompanyService {
+  static const String apiBaseUrl = String.fromEnvironment('API_BASE_URL');
 
-  static const String baseUrl = 'http://localhost:8080/api/companies';
+  static const String baseUrl = '$apiBaseUrl/api/companies';
+
   static const _storage = FlutterSecureStorage();
 
 

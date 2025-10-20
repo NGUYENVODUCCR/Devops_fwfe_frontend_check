@@ -1,0 +1,65 @@
+name: CI/CD for Flutter Frontend (Web)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Lấy code từ repo
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2️⃣ Cài đặt Flutter SDK
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.3'   # dùng đúng version bạn build Dockerfile
+
+      # 3️⃣ Kiểm tra môi trường Flutter
+      - name: Flutter doctor
+        run: flutter doctor
+
+      # 4️⃣ Build Flutter web (truyền API URL từ secrets)
+      - name: Build Flutter web
+        run: flutter build web --release --dart-define=API_BASE_URL=${{ secrets.API_BASE_URL }}
+
+      # 5️⃣ Đăng nhập Docker Hub
+      - name: Log in to Docker Hub
+        run: |
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+      # 6️⃣ Build Docker image và push lên Docker Hub
+      - name: Build & Push Docker image
+        run: |
+          IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/fwfe-frontend:latest
+          docker build -t $IMAGE_NAME .
+          docker push $IMAGE_NAME
+
+      # 7️⃣ SSH vào VPS để pull image mới và deploy Nginx container
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: root
+          password: ${{ secrets.VPS_PASS }}
+          script: |
+            echo "==== 🚀 Triển khai frontend lên VPS ===="
+
+            docker pull ${{ secrets.DOCKER_USERNAME }}/fwfe-frontend:latest
+
+            # Dừng container cũ nếu có
+            docker stop fwfe-frontend || true
+            docker rm fwfe-frontend || true
+
+            # Chạy container mới trên cổng 80
+            docker run -d \
+              --name fwfe-frontend \
+              -p 80:80 \
+              ${{ secrets.DOCKER_USERNAME }}/fwfe-frontend:latest
+
+            echo "✅ Deploy thành công! Frontend đang chạy trên cổng 80."

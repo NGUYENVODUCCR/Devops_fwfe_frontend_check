@@ -5,7 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class WorkAcceptanceService {
-  static const String baseUrl = 'http://localhost:8080/api/works';
+  static const String apiBaseUrl = String.fromEnvironment('API_BASE_URL');
+
+  static const String baseUrl = '$apiBaseUrl/api/works';
   static final _storage = FlutterSecureStorage();
 
   // Lấy token từ storage

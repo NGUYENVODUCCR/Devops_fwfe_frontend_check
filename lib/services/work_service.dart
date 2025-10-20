@@ -5,7 +5,9 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'company_service.dart';
 
 class WorkService {
-  static const String baseUrl = 'http://localhost:8080/api/works-posted';
+  static const String apiBaseUrl = String.fromEnvironment('API_BASE_URL');
+
+  static const String baseUrl = '$apiBaseUrl/api/works-posted';
   static const _storage = FlutterSecureStorage();
 
   static Future<Map<String, String>> _getAuthHeaders() async {

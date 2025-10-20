@@ -3,7 +3,10 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class ReportService {
-  static const String _baseUrl = 'http://localhost:8080/api/reports';
+  static const String apiBaseUrl = String.fromEnvironment('API_BASE_URL');
+
+  static const String baseUrl = '$apiBaseUrl/api/reports';
+ 
   static final storage = FlutterSecureStorage();
 
   // Gửi báo cáo người dùng
@@ -14,7 +17,7 @@ class ReportService {
     final token = await storage.read(key: 'token');
     final username = await storage.read(key: 'username');
 
-    final url = Uri.parse('$_baseUrl');
+    final url = Uri.parse('$baseUrl');
     final headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
@@ -33,7 +36,7 @@ class ReportService {
   static Future<List<Map<String, dynamic>>> getUnresolvedReports() async {
     final token = await storage.read(key: 'token');
 
-    final url = Uri.parse('$_baseUrl/unresolved');
+    final url = Uri.parse('$baseUrl/unresolved');
     final headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
