@@ -1,21 +1,41 @@
-# Stage 1: Build the app
-FROM ghcr.io/cirruslabs/flutter:3.24.3 AS build
+# -------------------------------
+# Stage 1: Build Flutter Web
+# -------------------------------
+    FROM ghcr.io/cirruslabs/flutter:3.24.3 AS build
 
-WORKDIR /app
-COPY pubspec.* ./
-RUN flutter pub get
-
-COPY . .
-
-# ⚠️ Chạy build dưới user non-root
-RUN useradd -ms /bin/bash appuser
-USER appuser
-
-RUN flutter build web --release
-
-# Stage 2: Serve using nginx
-FROM nginx:stable-alpine
-COPY --from=build /app/build/web /usr/share/nginx/html
-
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+    # Set working directory
+    WORKDIR /app
+    
+    # Copy pubspec & fetch dependencies first (cache layer)
+    COPY pubspec.* ./
+    RUN flutter pub get
+    
+    # Copy the rest of the source code
+    COPY . .
+    
+    # Optional: nếu bạn muốn user không phải root
+    # USER appuser
+    
+    # Fix Git dubious ownership (an extra layer of safety)
+    RUN git config --global --add safe.directory /sdks/flutter
+    
+    # Build Flutter web in release mode
+    RUN flutter build web --release
+    
+    # -------------------------------
+    # Stage 2: Serve with Nginx
+    # -------------------------------
+    FROM nginx:stable-alpine
+    
+    # Remove default nginx content
+    RUN rm -rf /usr/share/nginx/html/*
+    
+    # Copy built Flutter web output
+    COPY --from=build /app/build/web /usr/share/nginx/html
+    
+    # Expose port 80
+    EXPOSE 80
+    
+    # Start Nginx
+    CMD ["nginx", "-g", "daemon off;"]
+    
