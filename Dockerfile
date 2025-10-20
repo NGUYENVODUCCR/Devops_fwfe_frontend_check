@@ -1,4 +1,11 @@
+# ======================================
+# Stage 1: Build Flutter Web
+# ======================================
 FROM ghcr.io/cirruslabs/flutter:3.24.3 AS build
+
+# Tham số build để truyền API_BASE_URL
+ARG API_BASE_URL
+ENV API_BASE_URL=${API_BASE_URL}
 
 WORKDIR /app
 
@@ -17,13 +24,30 @@ RUN flutter pub get
 # Copy toàn bộ source code
 COPY . .
 
-# Cho phép appuser ghi/xóa trong project
-RUN chown -R appuser:appuser /app
+# Cho phép appuser ghi/xóa trong project và pub-cache
+RUN chown -R appuser:appuser /app /tmp/.pub-cache
 
 # Chuyển sang user appuser
 USER appuser
 
 ENV PUB_CACHE=/tmp/.pub-cache
 
-# Build web release
-RUN flutter build web --release
+# Build web release với biến môi trường
+RUN flutter build web --release --dart-define=API_BASE_URL=$API_BASE_URL
+
+# ======================================
+# Stage 2: Build final image Nginx
+# ======================================
+FROM nginx:alpine
+
+# Copy build web từ stage trước
+COPY --from=build /app/build/web /usr/share/nginx/html
+
+# Copy custom nginx.conf nếu cần
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose port 80
+EXPOSE 80
+
+# Chạy nginx
+CMD ["nginx", "-g", "daemon off;"]
