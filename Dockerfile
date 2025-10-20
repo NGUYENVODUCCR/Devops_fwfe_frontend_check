@@ -6,34 +6,22 @@
     # Set working directory
     WORKDIR /app
     
-    # Tạo user không phải root (nếu muốn)
-    RUN useradd -ms /bin/bash appuser
-    
-    # Copy pubspec & fetch dependencies first (tận dụng cache layer)
+    # Copy pubspec & fetch dependencies first (cache layer)
     COPY pubspec.* ./
     RUN flutter pub get
     
     # Copy toàn bộ source code
     COPY . .
     
-    # Fix Git dubious ownership để tránh lỗi khi build web
+    # Fix Git dubious ownership
     RUN git config --global --add safe.directory /sdks/flutter
     
-    # Fix Git dubious ownership để tránh lỗi khi build web
-    RUN git config --global --add safe.directory /sdks/flutter
-
-    # Tạo pub-cache nếu chưa tồn tại và cho phép user 'appuser' truy cập SDK và pub-cache
-    RUN mkdir -p /tmp/.pub-cache \
-        && chown -R appuser:appuser /sdks/flutter /tmp/.pub-cache
-
-    
-    # Sử dụng user appuser để build
-    USER appuser
-    
-    # Đặt PUB_CACHE writable cho user
+    # Tạo pub-cache writable và set quyền cho user appuser (nếu muốn)
     ENV PUB_CACHE=/tmp/.pub-cache
+    RUN mkdir -p $PUB_CACHE \
+        && chown -R root:root /sdks/flutter $PUB_CACHE
     
-    # Build Flutter web release
+    # Build Flutter web release (dưới root để tránh lỗi quyền)
     RUN flutter build web --release
     
     # -------------------------------
@@ -41,7 +29,7 @@
     # -------------------------------
     FROM nginx:stable-alpine
     
-    # Xóa nội dung mặc định của Nginx
+    # Remove default nginx content
     RUN rm -rf /usr/share/nginx/html/*
     
     # Copy build output từ stage trước
