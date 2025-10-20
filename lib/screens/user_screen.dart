@@ -6,7 +6,7 @@ import 'accepted_jobs_screen.dart';
 import 'list_work_accept_screen.dart';
 import 'ww_screen.dart';
 import 'settings_screen.dart';
-import 'companyListScreen.dart';
+import 'company_list_screen.dart';
 import 'support_screen.dart';
 import 'notification_screen.dart';
 import 'profile_screen.dart';
