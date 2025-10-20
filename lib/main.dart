@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => DataClass());
+  
     final ThemeController themeController = Get.find();
 
     return Obx(() => GetMaterialApp(
