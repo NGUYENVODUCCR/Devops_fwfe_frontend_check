@@ -52,6 +52,7 @@ class AuthService {
         final username = jsonData['username'] as String?;
         final id = jsonData['id'];
 
+        print("DEBUG LOGIN RESPONSE: $jsonData");
         if (token == null || role == null || username == null || id == null) {
           return 'Dữ liệu đăng nhập không đầy đủ từ server';
         }
