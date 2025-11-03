@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class WorkAcceptanceService {
-  static const String apiBaseUrl = String.fromEnvironment('API_BASE_URL');
+  static const String apiBaseUrl = String.fromEnvironment('API_BASE_URL', defaultValue: 'http://152.42.196.211:8080');
 
   static const String baseUrl = '$apiBaseUrl/api/works';
   static final _storage = FlutterSecureStorage();

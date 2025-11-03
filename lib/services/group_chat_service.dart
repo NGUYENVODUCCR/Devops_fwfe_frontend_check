@@ -33,7 +33,7 @@ class GroupChatService {
 
     _stompClient = StompClient(
       config: StompConfig.SockJS(
-        url: 'http://localhost:8080/ws',
+        url: 'http://152.42.196.211:8080/ws',
         stompConnectHeaders: {'Authorization': 'Bearer $_token'},
         webSocketConnectHeaders: {'Authorization': 'Bearer $_token'},
         onConnect: (StompFrame frame) {
@@ -115,7 +115,7 @@ class GroupChatService {
   }
 
   Future<void> markAsReadRest(int messageId) async {
-    final url = Uri.parse('http://localhost:8080/api/chat/mark-read/$messageId');
+    final url = Uri.parse('http://152.42.196.211:8080/api/chat/mark-read/$messageId');
     final response = await http.put(
       url,
       headers: {

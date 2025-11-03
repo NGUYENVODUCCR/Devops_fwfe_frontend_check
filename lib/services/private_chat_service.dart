@@ -33,7 +33,7 @@ class PrivateChatService {
 
     _stompClient = StompClient(
       config: StompConfig.SockJS(
-        url: 'http://localhost:8080/ws',
+        url: 'http://152.42.196.211:8080/ws',
         stompConnectHeaders: {'Authorization': 'Bearer $_token'},
         webSocketConnectHeaders: {'Authorization': 'Bearer $_token'},
         onConnect: (StompFrame frame) {
@@ -144,7 +144,7 @@ class PrivateChatService {
     }
 
     final url =
-    Uri.parse('http://localhost:8080/api/chat/mark-read/$messageId');
+    Uri.parse('http://152.42.196.211:8080/api/chat/mark-read/$messageId');
     final response = await http.put(
       url,
       headers: {
@@ -170,7 +170,7 @@ class PrivateChatService {
     }
 
     final url = Uri.parse(
-        'http://localhost:8080/api/chat/chat/history/private?user=$receiverUsername&limit=50');
+        'http://152.42.196.211:8080/api/chat/chat/history/private?user=$receiverUsername&limit=50');
     final response = await http.get(
       url,
       headers: {
@@ -202,7 +202,7 @@ class PrivateChatService {
     final String encodedUsername = Uri.encodeComponent(myUsername);
 
     final uri = Uri.parse(
-        'http://localhost:8080/api/chat/chat/private/inbox?myUsername=$encodedUsername');
+        'http://152.42.196.211:8080/api/chat/chat/private/inbox?myUsername=$encodedUsername');
 
     final response = await http.get(
       uri,

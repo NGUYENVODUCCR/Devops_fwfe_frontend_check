@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/account.dart';
 
 class AdminService {
-  final String apiBaseUrl = const String.fromEnvironment('API_BASE_URL', defaultValue: 'http://localhost:8080');
+  final String apiBaseUrl = const String.fromEnvironment('API_BASE_URL', defaultValue: 'http://152.42.196.211:8080');
   
   late final String baseUrl = '$apiBaseUrl/api/admin';
 
