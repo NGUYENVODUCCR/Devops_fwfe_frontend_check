@@ -7,10 +7,10 @@ import 'company_service.dart';
 class WorkService {
  static const String apiBaseUrl = String.fromEnvironment(
   'API_BASE_URL',
-  defaultValue: 'http://152.42.196.211:8080',
+  defaultValue: 'https://fwfe.duckdns.org/api'
 );
 
-  static const String baseUrl = '$apiBaseUrl/api/works-posted';
+  static const String baseUrl = '$apiBaseUrl/works-posted';
   static const _storage = FlutterSecureStorage();
 
   static Future<Map<String, String>> _getAuthHeaders() async {

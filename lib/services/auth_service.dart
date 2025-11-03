@@ -8,10 +8,10 @@ class AuthService {
   // Nếu không build với --dart-define, dùng giá trị mặc định
   static const String apiBaseUrl = String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: 'http://152.42.196.211:8080',
+    defaultValue: 'https://fwfe.duckdns.org/api'
   );
 
-  static const String baseUrl = '$apiBaseUrl/api/auth';
+  static const String baseUrl = '$apiBaseUrl/auth';
   
   final storage = const FlutterSecureStorage();
 

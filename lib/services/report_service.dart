@@ -3,8 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class ReportService {
-  static const String apiBaseUrl = String.fromEnvironment('API_BASE_URL', defaultValue: 'http://152.42.196.211:8080');
-
+  static const String apiBaseUrl = String.fromEnvironment('API_BASE_URL', defaultValue: 'https://fwfe.duckdns.org/api');
   static const String baseUrl = '$apiBaseUrl/api/reports';
  
   static final storage = FlutterSecureStorage();

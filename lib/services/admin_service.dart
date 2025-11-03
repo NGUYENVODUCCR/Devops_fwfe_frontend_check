@@ -3,9 +3,9 @@ import 'package:http/http.dart' as http;
 import '../models/account.dart';
 
 class AdminService {
-  final String apiBaseUrl = const String.fromEnvironment('API_BASE_URL', defaultValue: 'http://152.42.196.211:8080');
+  final String apiBaseUrl = const String.fromEnvironment('API_BASE_URL', defaultValue: 'https://fwfe.duckdns.org/api');
   
-  late final String baseUrl = '$apiBaseUrl/api/admin';
+  late final String baseUrl = '$apiBaseUrl/admin';
 
   Future<List<Account>> getAllAccounts(String token) async {
     final response = await http.get(
@@ -119,7 +119,7 @@ class AdminService {
 
   Future<void> changePassword(String oldPass, String newPass, String token) async {
     final response = await http.post(
-      Uri.parse('$baseUrl/api/admin/change-password'),
+      Uri.parse('$baseUrl/admin/change-password'),
       headers: {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
