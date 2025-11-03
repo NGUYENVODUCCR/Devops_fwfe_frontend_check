@@ -64,7 +64,7 @@ jobs:
             # Run new container
             docker run -d \
               --name fwfe-frontend \
-              -p 80:80 \
+              -p 3000:80 \
               ${{ secrets.DOCKER_USERNAME }}/fwfe-frontend:latest
 
             echo "✅ Deploy thành công!"
