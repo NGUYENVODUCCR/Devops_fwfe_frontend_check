@@ -417,7 +417,7 @@ class _UserScreenState extends State<UserScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'tên: ${_username ?? "..."}',
+                'Người dùng: ${_username ?? "..."}',
                 style: const TextStyle(color: Colors.white),
               ),
               const Text(
