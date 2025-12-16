@@ -351,7 +351,7 @@ class _AdminScreenState extends State<AdminScreen> {
           });
           switch (index) {
             case 0:
-              Navigator.pushReplacementNamed(context, '/'); // hoặc '/admin' nếu có route riêng cho AdminScreen
+              Navigator.pushReplacementNamed(context, '/'); 
               break;
             case 1:
               Navigator.pushReplacementNamed(context, '/admin/create');

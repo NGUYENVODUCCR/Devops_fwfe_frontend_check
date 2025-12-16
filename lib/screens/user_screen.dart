@@ -76,7 +76,7 @@ class _UserScreenState extends State<UserScreen> {
           );
           job['hasAccepted'] = accepted.isNotEmpty;
         } catch (e) {
-          job['hasAccepted'] = false; // fallback
+          job['hasAccepted'] = false;
           debugPrint('Lỗi khi kiểm tra accepted job với workId $workId: $e');
         }
       }
@@ -543,7 +543,7 @@ class _UserScreenState extends State<UserScreen> {
                                     MaterialPageRoute(
                                       builder: (_) => ListWorkAcceptScreen(
                                         workId: job['id'],
-                                        createdByUsername: job['createdByUsername'], // 👈 Thêm dòng này
+                                        createdByUsername: job['createdByUsername'],
                                       ),
                                     ),
                                   );
@@ -566,7 +566,7 @@ class _UserScreenState extends State<UserScreen> {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(content: Text('Nhận việc thành công!')),
                                       );
-                                      setState(() => job['hasAccepted'] = true); // cập nhật ngay
+                                      setState(() => job['hasAccepted'] = true); 
                                     } else {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(content: Text('Công việc đã đủ người <hoặc bạn đã từng hủy việc này>!')),

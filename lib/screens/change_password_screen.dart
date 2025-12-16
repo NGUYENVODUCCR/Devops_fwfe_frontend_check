@@ -32,10 +32,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
       if (token == null) throw Exception("Token không tồn tại");
 
-      // TODO: Gọi API đổi mật khẩu
-      // Ví dụ: await AdminService().changePassword(old, new, token);
-
-      // Xử lý thành công
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Đổi mật khẩu thành công!')),

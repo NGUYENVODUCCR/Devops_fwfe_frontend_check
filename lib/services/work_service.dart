@@ -7,7 +7,7 @@ import 'company_service.dart';
 class WorkService {
  static const String apiBaseUrl = String.fromEnvironment(
   'API_BASE_URL',
-  defaultValue: 'https://fwfe.duckdns.org/api'
+  defaultValue: 'https://findwork.duckdns.org/api'
 );
 
   static const String baseUrl = '$apiBaseUrl/works-posted';
@@ -43,7 +43,7 @@ class WorkService {
     required int maxAccepted,
     required int maxReceiver,
     required double salary,
-    required int companyId, // <-- truyền từ UI
+    required int companyId,
   }) async {
     final headers = await _getAuthHeaders();
 
@@ -56,7 +56,7 @@ class WorkService {
         'maxAccepted': maxAccepted,
         'maxReceiver': maxReceiver,
         'salary': salary,
-        'companyId': companyId, // <-- dùng đúng id
+        'companyId': companyId, 
       }),
     );
 
@@ -69,26 +69,6 @@ class WorkService {
       throw Exception('Tạo công việc thất bại: ${response.statusCode}');
     }
   }
-
-//
-  // static Future<List<Map<String, dynamic>>> getAllWorks() async {
-  //   final headers = await _getAuthHeaders();
-  //
-  //   final response = await http.get(
-  //     Uri.parse(baseUrl),
-  //     headers: headers,
-  //   );
-  //
-  //   print('[DEBUG] Get works response: ${response.statusCode}');
-  //   print('[DEBUG] Response body: ${response.body}');
-  //
-  //   if (response.statusCode == 200) {
-  //     final List<dynamic> data = jsonDecode(response.body);
-  //     return data.cast<Map<String, dynamic>>();
-  //   } else {
-  //     throw Exception('Không thể tải danh sách công việc: ${response.statusCode}');
-  //   }
-  // }
 
   static Future<List<Map<String, dynamic>>> getAllWorks() async {
     final headers = await _getAuthHeaders();
@@ -122,7 +102,7 @@ class WorkService {
     required int maxAccepted,
     required int maxReceiver,
     required double salary,
-    required int companyId, // <-- truyền từ UI
+    required int companyId, 
   }) async {
     final headers = await _getAuthHeaders();
 
@@ -135,7 +115,7 @@ class WorkService {
         'maxAccepted': maxAccepted,
         'maxReceiver': maxReceiver,
         'salary': salary,
-        'companyId': companyId, // <-- truyền đúng công ty
+        'companyId': companyId, 
       }),
     );
 

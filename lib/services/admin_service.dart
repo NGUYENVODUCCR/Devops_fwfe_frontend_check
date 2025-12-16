@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/account.dart';
 
 class AdminService {
-  final String apiBaseUrl = const String.fromEnvironment('API_BASE_URL', defaultValue: 'https://fwfe.duckdns.org/api');
+  final String apiBaseUrl = const String.fromEnvironment('API_BASE_URL', defaultValue: 'https://findwork.duckdns.org/api');
   
   late final String baseUrl = '$apiBaseUrl/admin';
 
@@ -69,7 +69,7 @@ class AdminService {
       int id,
       String name,
       String email,
-      String role,     // ← thêm role
+      String role,     
       bool locked,
       String token,
       {String updatedBy = "admin"}
@@ -83,7 +83,7 @@ class AdminService {
       body: jsonEncode({
         'name': name,
         'email': email,
-        'role': role,          // ← thêm vào JSON
+        'role': role,        
         'locked': locked,
         'updatedBy': updatedBy,
       }),

@@ -58,7 +58,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: Colors.grey[100],
       body: Column(
         children: [
-          // Header
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 20),
@@ -83,7 +82,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
           const SizedBox(height: 16),
 
-          // Avatar
           const CircleAvatar(
             radius: 40,
             backgroundColor: Colors.grey,
@@ -95,7 +93,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
           const SizedBox(height: 12),
 
-          // Hiển thị username
           Text(
             _username ?? 'Đang tải...',
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -103,7 +100,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
           const SizedBox(height: 20),
 
-          // Các ô thông tin (có thể load từ API)
           buildInfoTile(Icons.email, 'email@example.com'),
           buildInfoTile(Icons.phone, '0123456789'),
           buildInfoTile(Icons.calendar_today, '01/01/2000'),
@@ -112,7 +108,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
           const SizedBox(height: 20),
 
-          // Nút chỉnh sửa
           Container(
             decoration: BoxDecoration(
               gradient: const LinearGradient(

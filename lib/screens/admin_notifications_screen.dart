@@ -97,7 +97,7 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const ReportListScreen(), // gọi màn hình vừa tạo
+                    builder: (_) => const ReportListScreen(), 
                   ),
                 );
               },

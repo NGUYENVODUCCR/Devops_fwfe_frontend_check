@@ -35,7 +35,7 @@ class _ReportListScreenState extends State<ReportListScreen> {
       }
 
       setState(() {
-        _futureReports = ReportService.getUnresolvedReports(); // reload sau khi update
+        _futureReports = ReportService.getUnresolvedReports();
       });
 
       ScaffoldMessenger.of(context).showSnackBar(

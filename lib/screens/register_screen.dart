@@ -46,7 +46,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
 
     setState(() {
-      _errorMessage = null; // Clear error if any
+      _errorMessage = null; 
     });
 
     final request = RegisterRequest(
@@ -63,7 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Đăng ký thành công!")),
       );
-      Navigator.pop(context); // Quay lại login
+      Navigator.pop(context); 
     } else {
       setState(() {
         _errorMessage = "Lỗi: $result";
@@ -144,9 +144,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         backgroundColor: MaterialStateProperty.resolveWith<Color>(
                               (Set<MaterialState> states) {
                             if (states.contains(MaterialState.hovered)) {
-                              return const Color(0xFF7B82E0); // Hover
+                              return const Color(0xFF7B82E0); 
                             }
-                            return const Color(0xFF9D4EDD); // Default
+                            return const Color(0xFF9D4EDD); 
                           },
                         ),
                         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),

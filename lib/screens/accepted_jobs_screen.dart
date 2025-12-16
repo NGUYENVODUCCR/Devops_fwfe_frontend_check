@@ -27,7 +27,6 @@ class _AcceptedJobsScreenState extends State<AcceptedJobsScreen> {
     try {
       final List<dynamic> allAccepted = [];
 
-      // Giả sử gọi tất cả công việc từ backend
       final allJobs = await WorkService.getAllWorks();
 
       for (var job in allJobs) {
@@ -66,7 +65,6 @@ class _AcceptedJobsScreenState extends State<AcceptedJobsScreen> {
       appBar: AppBar(title: const Text('Công việc đã nhận')),
       body: Column(
         children: [
-          // 🔽 Dropdown lọc trạng thái
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
@@ -82,7 +80,7 @@ class _AcceptedJobsScreenState extends State<AcceptedJobsScreen> {
                     setState(() {
                       selectedStatus = value!;
                     });
-                    loadAcceptedJobs(); // reload theo trạng thái mới
+                    loadAcceptedJobs();
                   },
                   items: statusOptions.map((status) {
                     return DropdownMenuItem(
@@ -95,7 +93,7 @@ class _AcceptedJobsScreenState extends State<AcceptedJobsScreen> {
             ),
           ),
 
-          // 🔽 Danh sách công việc đã nhận hoặc thông báo không có dữ liệu
+
           Expanded(
             child: acceptedJobs.isEmpty
                 ? Center(

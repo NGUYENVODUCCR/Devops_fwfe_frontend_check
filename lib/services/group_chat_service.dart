@@ -33,7 +33,7 @@ class GroupChatService {
 
     _stompClient = StompClient(
       config: StompConfig.SockJS(
-        url: 'https://fwfe.duckdns.org/ws',
+        url: 'https://findwork.duckdns.org/ws',
         stompConnectHeaders: {'Authorization': 'Bearer $_token'},
         webSocketConnectHeaders: {'Authorization': 'Bearer $_token'},
         onConnect: (StompFrame frame) {
@@ -77,7 +77,7 @@ class GroupChatService {
       _messages.add(data);
     }
 
-    callback(data); // Cập nhật UI
+    callback(data); 
   }
 
   void sendGroupMessage(String content) {
@@ -115,7 +115,7 @@ class GroupChatService {
   }
 
   Future<void> markAsReadRest(int messageId) async {
-    final url = Uri.parse('https://fwfe.duckdns.org/api/chat/mark-read/$messageId');
+    final url = Uri.parse('https://findwork.duckdns.org/api/chat/mark-read/$messageId');
     final response = await http.put(
       url,
       headers: {

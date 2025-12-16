@@ -19,7 +19,6 @@ void main() async {
   Get.put(ThemeController());
   final storage = FlutterSecureStorage();
 
-  // Đọc username và khởi tạo chat service
   final String? username = await storage.read(key: 'username');
   final PrivateChatService chatService = PrivateChatService();
 
@@ -72,7 +71,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/admin/reports',
           page: () => AdminNotificationsScreen(
-            chatService: chatService, // Không cần truyền currentUsername nữa
+            chatService: chatService,
           ),
         ),
 

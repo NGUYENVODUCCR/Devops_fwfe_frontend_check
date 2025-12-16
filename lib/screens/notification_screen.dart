@@ -58,7 +58,6 @@ class NotificationScreen extends StatelessWidget {
           backgroundColor: Colors.grey[100],
           body: Column(
             children: [
-              // Header
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(vertical: 20),
@@ -81,7 +80,6 @@ class NotificationScreen extends StatelessWidget {
                 ),
               ),
 
-              // Nút mở Hộp thư riêng
               Container(
                 margin: const EdgeInsets.only(top: 12),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -109,7 +107,6 @@ class NotificationScreen extends StatelessWidget {
                 ),
               ),
 
-              // Nút đánh dấu đã đọc
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -135,7 +132,6 @@ class NotificationScreen extends StatelessWidget {
                 ),
               ),
 
-              // Danh sách thông báo
               Expanded(
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 12),

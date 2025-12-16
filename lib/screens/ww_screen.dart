@@ -62,7 +62,6 @@ class _WWScreenState extends State<WWScreen> with SingleTickerProviderStateMixin
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
   }
 
-  // === Công ty ===
   void _showCompanyDialog({Map<String, dynamic>? company}) {
     editingCompany = company;
     if (company != null) {
@@ -166,7 +165,6 @@ class _WWScreenState extends State<WWScreen> with SingleTickerProviderStateMixin
     );
   }
 
-  // === Công việc ===
   void _showWorkDialog({Map<String, dynamic>? work}) {
     editingWork = work;
     if (work != null) {
@@ -289,7 +287,6 @@ class _WWScreenState extends State<WWScreen> with SingleTickerProviderStateMixin
     );
   }
 
-  // === UI chung ===
   final _titleStyle = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white);
   final _textStyle = const TextStyle(color: Colors.white);
 

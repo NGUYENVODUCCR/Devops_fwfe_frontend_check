@@ -30,7 +30,6 @@ class _AdminCreateAccountScreenState extends State<AdminCreateAccountScreen> {
   final TextEditingController confirmPasswordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
 
-  // Company fields for ROLE_MANAGER
   final TextEditingController companyNameController = TextEditingController();
   final TextEditingController companyDescriptionController = TextEditingController();
   final TextEditingController companyTypeController = TextEditingController();

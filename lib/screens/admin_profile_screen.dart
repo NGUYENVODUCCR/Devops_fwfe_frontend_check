@@ -102,7 +102,6 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            // Đã xóa nút đăng xuất ở đây
           ],
         ),
       ),

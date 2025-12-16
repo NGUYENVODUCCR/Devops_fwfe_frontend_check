@@ -76,7 +76,6 @@ class SettingsScreen extends StatelessWidget {
             onTap: () => _showMessage(context, 'Ngôn ngữ ứng dụng'),
           ),
 
-          // Sử dụng Obx để phản ứng với thay đổi từ ThemeController
           Obx(() => _buildThemeToggleTile(
             context,
             themeController.isDarkMode.value,
@@ -141,7 +140,7 @@ class SettingsScreen extends StatelessWidget {
           value: isDarkMode,
           activeColor: Colors.white,
           onChanged: (value) {
-            onToggle(value); // Gọi toggleTheme từ controller
+            onToggle(value);
           },
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

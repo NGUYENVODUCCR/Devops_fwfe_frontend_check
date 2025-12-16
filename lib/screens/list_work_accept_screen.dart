@@ -82,7 +82,7 @@ class _ListWorkAcceptScreenState extends State<ListWorkAcceptScreen> {
                   reason: reason,
                 );
 
-                Navigator.of(context).pop(); // Đóng dialog
+                Navigator.of(context).pop();
 
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -118,7 +118,6 @@ class _ListWorkAcceptScreenState extends State<ListWorkAcceptScreen> {
       }
     } catch (e) {
       print('Lỗi cập nhật trạng thái: $e');
-      // Hiển thị lỗi chi tiết từ server
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.toString().replaceAll("Exception: ", ""))),
       );

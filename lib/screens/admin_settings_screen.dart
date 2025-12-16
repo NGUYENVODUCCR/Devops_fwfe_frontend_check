@@ -34,7 +34,6 @@ class _AdminSettingsScreenState extends State<AdminSettingsScreen> {
         Navigator.pushNamed(context, '/admin/profile');
         break;
       case 4:
-      // Trang hiện tại - không làm gì
         break;
     }
   }

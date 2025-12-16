@@ -54,15 +54,13 @@ class _PrivateChatScreenState extends State<PrivateChatScreen> {
           }
 
           setState(() {
-            // Xóa bản tạm (giả ID)
             _messages.removeWhere((m) =>
-            m['id'] == msg['id'] || // Trùng ID chính xác
-                (m['content'] == msg['content'] && // Nội dung giống nhau
+            m['id'] == msg['id'] || 
+                (m['content'] == msg['content'] && 
                     m['sender'] == msg['sender'] &&
                     m['receiver'] == msg['receiver'] &&
-                    (m['id'] as int?)?.toString().length == 13)); // ID giả = timestamp ms
+                    (m['id'] as int?)?.toString().length == 13)); 
 
-            // Chèn bản chính xác
             _messages.insert(0, msg);
           });
 
@@ -97,7 +95,7 @@ class _PrivateChatScreenState extends State<PrivateChatScreen> {
     if (content.isEmpty || _username == null) return;
 
     final tempMessage = {
-      'id': DateTime.now().millisecondsSinceEpoch, // Fake ID for temporary UI
+      'id': DateTime.now().millisecondsSinceEpoch, 
       'content': content,
       'sender': _username,
       'receiver': widget.receiverUsername,

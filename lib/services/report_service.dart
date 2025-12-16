@@ -3,12 +3,11 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class ReportService {
-  static const String apiBaseUrl = String.fromEnvironment('API_BASE_URL', defaultValue: 'https://fwfe.duckdns.org/api');
+  static const String apiBaseUrl = String.fromEnvironment('API_BASE_URL', defaultValue: 'https://findwork.duckdns.org/api');
   static const String baseUrl = '$apiBaseUrl/reports';
  
   static final storage = FlutterSecureStorage();
 
-  // Gửi báo cáo người dùng
   static Future<bool> reportUser({
     required int reportedAccountId,
     required String reason,
@@ -31,7 +30,6 @@ class ReportService {
     return response.statusCode == 200;
   }
 
-  // Lấy danh sách báo cáo chưa xử lý (chỉ ADMIN)
   static Future<List<Map<String, dynamic>>> getUnresolvedReports() async {
     final token = await storage.read(key: 'token');
 

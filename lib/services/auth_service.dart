@@ -5,17 +5,15 @@ import '../models/login_request.dart';
 import '../models/register_request.dart';
 
 class AuthService {
-  // Nếu không build với --dart-define, dùng giá trị mặc định
   static const String apiBaseUrl = String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: 'https://fwfe.duckdns.org/api'
+    defaultValue: 'https://findwork.duckdns.org/api'
   );
 
   static const String baseUrl = '$apiBaseUrl/auth';
   
   final storage = const FlutterSecureStorage();
 
-  // ====================== REGISTER ======================
   Future<String?> register(RegisterRequest request) async {
     try {
       final response = await http.post(
@@ -34,7 +32,6 @@ class AuthService {
     }
   }
 
-  // ====================== LOGIN ======================
   Future<String?> login(LoginRequest request, Function(String role) onSuccess) async {
     try {
       final response = await http.post(
@@ -46,7 +43,6 @@ class AuthService {
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
 
-        // Kiểm tra null trước khi lưu vào storage
         final token = jsonData['token'] as String?;
         final role = jsonData['role'] as String?;
         final username = jsonData['username'] as String?;
@@ -58,7 +54,6 @@ class AuthService {
           return 'Dữ liệu đăng nhập không đầy đủ từ server';
         }
 
-        // Lưu vào storage
         await storage.write(key: 'token', value: token);
         await storage.write(key: 'role', value: role);
         await storage.write(key: 'username', value: username);
@@ -75,7 +70,6 @@ class AuthService {
     }
   }
 
-  // ====================== FORGOT PASSWORD ======================
   Future<String?> forgotPassword(String email) async {
     try {
       final response = await http.post(
@@ -92,7 +86,6 @@ class AuthService {
     }
   }
 
-  // ====================== VERIFY CODE ======================
   Future<bool> verifyCode(String email, String code) async {
     try {
       final response = await http.post(
@@ -106,7 +99,6 @@ class AuthService {
     }
   }
 
-  // ====================== RESET PASSWORD ======================
   Future<String?> resetPassword(String email, String code, String newPassword) async {
     try {
       final response = await http.post(
@@ -127,7 +119,6 @@ class AuthService {
     }
   }
 
-  // ====================== GET ACCOUNT ID ======================
   Future<int?> getAccountId() async {
     final idStr = await storage.read(key: 'id');
     if (idStr == null) return null;
@@ -136,7 +127,6 @@ class AuthService {
     return id;
   }
 
-  // ====================== LOGOUT ======================
   Future<bool> logout() async {
     final token = await getToken();
     if (token == null) return false;
@@ -160,7 +150,6 @@ class AuthService {
     }
   }
 
-  // ====================== STORAGE HELPERS ======================
   Future<String?> getToken() async => await storage.read(key: 'token');
   Future<String?> getRole() async => await storage.read(key: 'role');
   Future<String?> getUsername() async => await storage.read(key: 'username');
